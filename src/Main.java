@@ -22,15 +22,22 @@ public class Main {
   public static void main(String args[]) {
     String ch;
     Main Game = new Main();
+    Scanner in = new Scanner(System.in);
+    String gameMode = Game.gameMode();
     do {
       System.out.println("Generating new game board");
       Game.newBoard();
-      Game.play();
+      Game.play(gameMode);
       Game.currentBoard();
       Game.roundCounter = 0;
       System.out.println("Would you like to play again (Enter 'yes'/'no')? ");
-      Scanner in = new Scanner(System.in);
       ch = in.nextLine();
+      if (ch.equalsIgnoreCase("yes")){
+        System.out.println("Would you like to change game mode (Enter 'yes'/'no')?");
+        if(in.nextLine().equalsIgnoreCase("yes")){
+          gameMode = Game.gameMode();
+        }
+      }
       if (ch.equalsIgnoreCase("no")){
         System.out.println("Thanks for playing");
         System.exit(1);
@@ -63,12 +70,15 @@ public class Main {
     return "currentBoard";
   } //end currentBoard
 
-  public void play() {
+  public void play(String gameMode) {
     int spot;
     char blank = ' ';
 
     //System.out.println("Player " + getPlayer() + " will go first");
-    System.out.println("Bot goes first");
+    if(gameMode.equalsIgnoreCase("yes")){
+      System.out.println("Bot goes first");
+    }
+    System.out.println("--- BEGIN GAME ---");
     do {
       currentBoard();
 
@@ -76,7 +86,7 @@ public class Main {
       System.out.println("--------------------------");
       System.out.println(" ");
 
-      if (getPlayer() == 'X'){ //checks to see if the bot should make the move
+      if (gameMode.equalsIgnoreCase("yes") && getPlayer() == 'X'){ //checks to see if the bot should make the move
         boolean posTaken = true;
         while(posTaken){
           spot = AI();
@@ -171,9 +181,9 @@ public class Main {
       if (posn[i] == 'X' || posn[i] == 'O') {
         if (i == 9) {
           char Draw = 'D';
-          System.out.println("_______________");
+          System.out.println("---------------");
           System.out.println(" Game is a draw");
-          System.out.println("_______________");
+          System.out.println("---------------");
           return Draw;
         }
         continue;
@@ -187,7 +197,7 @@ public class Main {
   public boolean checkPosition(int spot) {
 
     if (posn[spot] == 'X' || posn[spot] == 'O') {
-      System.out.println("That posn is already taken, please choose another");
+      System.out.println("That position is already taken, please choose another");
       return true;
     } else {
       return false;
@@ -218,9 +228,6 @@ public class Main {
       choice = 5;
     } else {
       while (!done){
-        //checkBotPosition(checkspot);
-        //System.out.println("Checkspot is " + checkspot + " and the value there is " + checkBotPosition(checkspot));
-
         //check board and assign values
         //ZZZ = 300
         //ZZX = 201
@@ -243,7 +250,7 @@ public class Main {
         switch (checkspot){
           case 1: pos1Val = value;
             break;
-          case  2: pos2Val = value;
+          case 2: pos2Val = value;
             break;
           case 3: pos3Val = value;
             break;
@@ -267,14 +274,11 @@ public class Main {
           done = true;
         }
         checkspot++;
-        //System.out.println("done is " + done);
       }
 
       choice = getChoice();
 
     }//end else
-
-    //System.out.println("Round: " + roundCounter);
     System.out.println("Bot has chosen: " + choice);
     return choice;
   }
@@ -503,5 +507,13 @@ public class Main {
       choice = in.nextInt();
     }
     return choice;
+  }
+
+  public String gameMode(){
+    //see if the user would like to play against the bot. If gameMode is 'yes' they are playing the bot
+    Scanner in = new Scanner(System.in);
+    System.out.println("Would you like to play against the Bot? (Enter 'yes'/'no')");
+    String gameMode = in.nextLine();
+    return gameMode;
   }
 }
