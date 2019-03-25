@@ -14,20 +14,21 @@ The bot plays with these given rules checked in the following order:
 
 ## Getting Started
 
-- To use: Download all files, run Main.java. The bot will play first as 'X', To make your selection type the number 1-9 of the space you would like to select, then press 'enter'. 
+- To use: Download all files, run Main.java. To make your selection type the number 1-9 of the space you would like to select, then press 'enter'. The game can be played against another player or against a bot. The bot can play first or second.
 
 ## Versions
 1.0.0 General Tic Tac Toe gameplay. 2 players alternating turns.  
 1.1.0 Added Bot player as replacement to 2 player mode.  
 1.1.1 Fixed issue where bot would repeatedly try to play position 7.  
-1.2.0 (CURRENT) Added 2 player mode and allowed user to choose which mode they play.  
+1.2.0 Added 2 player mode and allowed user to choose which mode they play.  
+1.3.0 (CURRENT) Added scoreboard and ability for bot to play second.
 
 ## TO DO
 - [X] 2 player functionality
 - [x] Bot player
 - [X] Ability to switch gameplay modes
-- [ ] Bot playing second
-- [ ] Game score recorder
+- [X] Bot playing second
+- [X] Game scoreboard
 - [ ] Gameplay stats (wins/losses/games played/moves made)
 - [ ] Gameplay GUI
 
